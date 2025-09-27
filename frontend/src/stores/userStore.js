@@ -24,9 +24,6 @@ export const useUserStore = defineStore('user', () => {
 
   // Actions
   const fetchProfile = async () => {
-    loading.value = true
-    error.value = null
-    
     try {
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1000))
@@ -36,15 +33,11 @@ export const useUserStore = defineStore('user', () => {
     } catch (err) {
       error.value = 'Failed to fetch profile data'
       console.error('Error fetching profile:', err)
-    } finally {
-      loading.value = false
+      throw err
     }
   }
 
   const fetchAchievements = async () => {
-    loading.value = true
-    error.value = null
-    
     try {
       // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 800))
@@ -54,8 +47,7 @@ export const useUserStore = defineStore('user', () => {
     } catch (err) {
       error.value = 'Failed to fetch achievements data'
       console.error('Error fetching achievements:', err)
-    } finally {
-      loading.value = false
+      throw err
     }
   }
 
@@ -108,8 +100,25 @@ export const useUserStore = defineStore('user', () => {
   }
 
   const resetData = () => {
-    profile.value = null
-    achievements.value = []
+    // Reset to initial state with level 1
+    profile.value = {
+      name: "Alex Smith",
+      avatar_url: "https://storage.gameindustry.be/OrTHdlRz-il4kDXrH-GJETNn8K-DPLl1B7t-strivewebsite2.png",
+      level: 1,
+      current_xp: 0,
+      xp_to_next_level: 100
+    }
+    
+    // Reset achievements to only the first one (level 1)
+    achievements.value = [
+      {
+        id: 1,
+        title: "First Step",
+        description: "Completed your first task.",
+        icon_url: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?w=400"
+      }
+    ]
+    
     loading.value = false
     error.value = null
   }
