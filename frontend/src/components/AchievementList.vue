@@ -292,6 +292,10 @@ const handleImageError = (event) => {
 
 .stat-item {
   padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .stat-value {
@@ -351,10 +355,21 @@ const handleImageError = (event) => {
 @media (max-width: 576px) {
   .achievement-stats .row {
     gap: 0.5rem;
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .achievement-stats .col-4 {
+    flex: 1;
+    min-width: 0;
   }
   
   .stat-value {
     font-size: 1rem;
+  }
+  
+  .stat-label {
+    font-size: 0.7rem;
   }
 }
 

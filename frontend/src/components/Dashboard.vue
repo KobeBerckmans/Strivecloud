@@ -563,13 +563,14 @@ onMounted(() => {
   align-items: center;
   gap: 0.75rem;
   background: rgba(255, 255, 255, 0.7);
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 2rem;
   border-radius: 12px;
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  min-width: 240px;
 }
 
 .header-stats .stat-item:hover {
@@ -611,8 +612,9 @@ onMounted(() => {
 
 .stat-content {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .stat-number {
@@ -626,7 +628,7 @@ onMounted(() => {
   font-size: 0.8rem;
   color: #6c757d;
   font-weight: 500;
-  margin-top: 0.1rem;
+  margin-top: 0;
 }
 
 /* Action Buttons */

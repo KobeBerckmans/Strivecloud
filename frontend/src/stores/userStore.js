@@ -92,7 +92,10 @@ export const useUserStore = defineStore('user', () => {
     
     profile.value.level += 1
     profile.value.current_xp = 0
-    profile.value.xp_to_next_level = Math.floor(profile.value.xp_to_next_level * 1.2) // Increase XP needed by 20%
+    // Calculate XP needed for next level based on level progression
+    // Level 1: 100, Level 2: 200, Level 3: 300, Level 4: 400, Level 5: 500, Level 6: 600, Level 7: 700, Level 8: 1500, Level 9: 2000, Level 10: 2500
+    const xpRequirements = [100, 200, 300, 400, 500, 600, 700, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000]
+    profile.value.xp_to_next_level = xpRequirements[profile.value.level - 1] || Math.floor(profile.value.xp_to_next_level * 1.2)
     
     // Check for achievement unlocks based on level
     checkAchievementUnlocks()
