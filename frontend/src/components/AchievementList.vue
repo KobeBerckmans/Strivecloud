@@ -27,7 +27,10 @@
           v-for="achievement in achievements" 
           :key="achievement.id"
           class="achievement-item"
-          :class="{ 'achievement-unlocked': true }"
+          :class="{ 
+            'achievement-unlocked': achievement.unlocked,
+            'achievement-locked': !achievement.unlocked
+          }"
         >
           <div class="achievement-card">
             <!-- Achievement Icon -->
@@ -36,24 +39,36 @@
                 :src="achievement.icon_url" 
                 :alt="achievement.title"
                 class="achievement-image"
+                :class="{ 'locked-image': !achievement.unlocked }"
                 @error="handleImageError"
               />
-              <div class="achievement-badge">
+              <div class="achievement-badge" v-if="achievement.unlocked">
                 <i class="bi bi-check-circle-fill"></i>
+              </div>
+              <div class="achievement-badge locked-badge" v-else>
+                <i class="bi bi-lock-fill"></i>
               </div>
             </div>
             
             <!-- Achievement Content -->
             <div class="achievement-content">
-              <h6 class="achievement-title">{{ achievement.title }}</h6>
-              <p class="achievement-description">{{ achievement.description }}</p>
+              <h6 class="achievement-title" :class="{ 'locked-title': !achievement.unlocked }">
+                {{ achievement.title }}
+              </h6>
+              <p class="achievement-description" :class="{ 'locked-description': !achievement.unlocked }">
+                {{ achievement.description }}
+              </p>
             </div>
             
             <!-- Achievement Status -->
             <div class="achievement-status">
-              <span class="badge bg-success">
+              <span v-if="achievement.unlocked" class="badge bg-success">
                 <i class="bi bi-unlock me-1"></i>
                 Unlocked
+              </span>
+              <span v-else class="badge bg-secondary">
+                <i class="bi bi-lock me-1"></i>
+                Locked
               </span>
             </div>
           </div>
@@ -80,13 +95,13 @@
           </div>
           <div class="col-4">
             <div class="stat-item">
-              <div class="stat-value">{{ achievements.length }}</div>
+              <div class="stat-value">{{ unlockedCount }}</div>
               <div class="stat-label">Unlocked</div>
             </div>
           </div>
           <div class="col-4">
             <div class="stat-item">
-              <div class="stat-value">0</div>
+              <div class="stat-value">{{ lockedCount }}</div>
               <div class="stat-label">Locked</div>
             </div>
           </div>
@@ -106,6 +121,14 @@ const userStore = useUserStore()
 const achievements = computed(() => userStore.achievements)
 const loading = computed(() => userStore.loading)
 const error = computed(() => userStore.error)
+
+const unlockedCount = computed(() => {
+  return achievements.value.filter(achievement => achievement.unlocked).length
+})
+
+const lockedCount = computed(() => {
+  return achievements.value.filter(achievement => !achievement.unlocked).length
+})
 
 // Methods
 const handleImageError = (event) => {
@@ -188,6 +211,23 @@ const handleImageError = (event) => {
   transform: scale(1.05);
 }
 
+.locked-image {
+  filter: grayscale(100%) brightness(0.7);
+}
+
+.locked-title {
+  color: #6c757d !important;
+}
+
+.locked-description {
+  color: #6c757d !important;
+}
+
+.locked-badge {
+  background: #6c757d !important;
+  color: white !important;
+}
+
 .achievement-badge {
   position: absolute;
   bottom: -5px;
@@ -202,6 +242,17 @@ const handleImageError = (event) => {
   justify-content: center;
   font-size: 0.8rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.achievement-locked .achievement-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 1px solid #dee2e6;
+  opacity: 0.7;
+}
+
+.achievement-locked:hover .achievement-card {
+  box-shadow: 0 8px 25px rgba(108, 117, 125, 0.15);
+  border-color: #6c757d;
 }
 
 .achievement-content {
