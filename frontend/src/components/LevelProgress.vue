@@ -275,14 +275,51 @@ const addXP = (amount) => {
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
+@media (max-width: 992px) and (min-width: 769px) {
   .circular-progress svg {
     width: 100px;
     height: 100px;
   }
   
+  .progress-ring-background,
+  .progress-ring-fill {
+    r: 42;
+    cx: 50;
+    cy: 50;
+  }
+  
   .progress-percentage {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+  }
+  
+  .progress-label {
+    font-size: 0.7rem;
+  }
+  
+  .xp-value {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .circular-progress svg {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .progress-ring-background,
+  .progress-ring-fill {
+    r: 32;
+    cx: 40;
+    cy: 40;
+  }
+  
+  .progress-percentage {
+    font-size: 1.1rem;
+  }
+  
+  .progress-label {
+    font-size: 0.6rem;
   }
   
   .xp-value {

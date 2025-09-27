@@ -142,12 +142,12 @@
 
         <!-- Top Row: Profile and Level Progress -->
         <div class="row mb-5">
-          <div class="col-lg-4 mb-4">
+          <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mb-4">
             <div class="component-wrapper">
               <ProfileCard />
             </div>
           </div>
-          <div class="col-lg-8 mb-4">
+          <div class="col-xl-8 col-lg-6 col-md-6 col-sm-12 mb-4">
             <div class="component-wrapper">
               <LevelProgress />
             </div>
@@ -165,15 +165,10 @@
           </div>
           
           <div class="row g-4">
-            <div class="col-lg-3 col-md-6">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
               <div class="modern-stat-card stat-card-1">
                 <div class="stat-header">
-                  <div class="stat-icon">
-                    <i class="bi bi-trophy-fill"></i>
-                  </div>
-                  <div class="stat-trend">
-                    <i class="bi bi-arrow-up"></i>
-                  </div>
+                  <div class="stat-line"></div>
                 </div>
                 <div class="stat-body">
                   <div class="stat-number">{{ achievements.length }}</div>
@@ -188,15 +183,10 @@
               </div>
             </div>
             
-            <div class="col-lg-3 col-md-6">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
               <div class="modern-stat-card stat-card-2">
                 <div class="stat-header">
-                  <div class="stat-icon">
-                    <i class="bi bi-graph-up"></i>
-                  </div>
-                  <div class="stat-trend">
-                    <i class="bi bi-arrow-up"></i>
-                  </div>
+                  <div class="stat-line"></div>
                 </div>
                 <div class="stat-body">
                   <div class="stat-number">{{ currentLevel }}</div>
@@ -211,15 +201,10 @@
               </div>
             </div>
             
-            <div class="col-lg-3 col-md-6">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
               <div class="modern-stat-card stat-card-3">
                 <div class="stat-header">
-                  <div class="stat-icon">
-                    <i class="bi bi-star-fill"></i>
-                  </div>
-                  <div class="stat-trend">
-                    <i class="bi bi-arrow-up"></i>
-                  </div>
+                  <div class="stat-line"></div>
                 </div>
                 <div class="stat-body">
                   <div class="stat-number">{{ currentXP.toLocaleString() }}</div>
@@ -234,15 +219,10 @@
               </div>
             </div>
             
-            <div class="col-lg-3 col-md-6">
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
               <div class="modern-stat-card stat-card-4">
                 <div class="stat-header">
-                  <div class="stat-icon">
-                    <i class="bi bi-target"></i>
-                  </div>
-                  <div class="stat-trend">
-                    <i class="bi bi-arrow-down"></i>
-                  </div>
+                  <div class="stat-line"></div>
                 </div>
                 <div class="stat-body">
                   <div class="stat-number">{{ (xpToNextLevel - currentXP).toLocaleString() }}</div>
@@ -280,7 +260,7 @@
                   Quick Actions
                 </h5>
                 <div class="row">
-                  <div class="col-md-3 mb-2">
+                  <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
                     <button 
                       @click="addXP(50)" 
                       class="btn btn-warning btn-sm w-100"
@@ -290,7 +270,7 @@
                       +50 XP
                     </button>
                   </div>
-                  <div class="col-md-3 mb-2">
+                  <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
                     <button 
                       @click="addXP(100)" 
                       class="btn btn-success btn-sm w-100"
@@ -300,7 +280,7 @@
                       +100 XP
                     </button>
                   </div>
-                  <div class="col-md-3 mb-2">
+                  <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
                     <button 
                       @click="addXP(200)" 
                       class="btn btn-info btn-sm w-100"
@@ -310,7 +290,7 @@
                       +200 XP
                     </button>
                   </div>
-                  <div class="col-md-3 mb-2">
+                  <div class="col-lg-3 col-md-6 col-sm-6 mb-2">
                     <button 
                       @click="resetData" 
                       class="btn btn-outline-danger btn-sm w-100"
@@ -611,6 +591,7 @@ onMounted(() => {
   font-size: 1.2rem;
   color: white;
   position: relative;
+  aspect-ratio: 1;
 }
 
 .stat-item-1 .stat-icon-wrapper { 
@@ -892,9 +873,10 @@ onMounted(() => {
 }
 
 .stats-subtitle {
-  color: #6c757d;
+  color: #ffffff;
   font-size: 1rem;
   margin-bottom: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .modern-stat-card {
@@ -916,58 +898,34 @@ onMounted(() => {
 
 .stat-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
 }
 
-.stat-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
+.stat-line {
+  width: 60px;
+  height: 4px;
+  border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.2rem;
-  color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.stat-card-1 .stat-icon { 
+.stat-card-1 .stat-line { 
   background: linear-gradient(135deg, #ffc107, #ff8c00);
 }
 
-.stat-card-2 .stat-icon { 
+.stat-card-2 .stat-line { 
   background: linear-gradient(135deg, #28a745, #20c997);
 }
 
-.stat-card-3 .stat-icon { 
+.stat-card-3 .stat-line { 
   background: linear-gradient(135deg, #17a2b8, #6f42c1);
 }
 
-.stat-card-4 .stat-icon { 
+.stat-card-4 .stat-line { 
   background: linear-gradient(135deg, #dc3545, #e83e8c);
-}
-
-.stat-trend {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  color: white;
-}
-
-.stat-card-1 .stat-trend,
-.stat-card-2 .stat-trend,
-.stat-card-3 .stat-trend {
-  background: linear-gradient(135deg, #28a745, #20c997);
-}
-
-.stat-card-4 .stat-trend {
-  background: linear-gradient(135deg, #ffc107, #ff8c00);
 }
 
 .stat-body {
@@ -1090,7 +1048,75 @@ onMounted(() => {
   100% { transform: translateX(100%); }
 }
 
-/* Responsive adjustments */
+/* Tablet Responsive Adjustments */
+@media (max-width: 992px) and (min-width: 769px) {
+  .dashboard-header {
+    padding: 2rem 0;
+  }
+  
+  .title-main {
+    font-size: 2.2rem;
+  }
+  
+  .title-sub {
+    font-size: 1.4rem;
+  }
+  
+  .header-stats {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .header-stats .stat-item {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .btn-refresh {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .modern-stat-card {
+    padding: 1.3rem;
+  }
+  
+  .stat-number {
+    font-size: 1.8rem;
+  }
+  
+  .quick-actions-card .col-md-3 {
+    margin-bottom: 0.75rem;
+  }
+  
+  .quick-actions-card .row {
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .quick-actions-card .col-lg-3,
+  .quick-actions-card .col-md-6 {
+    flex: 0 0 auto;
+    max-width: 200px;
+    margin: 0;
+  }
+  
+  .quick-actions-card .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+/* Mobile Responsive Adjustments */
 @media (max-width: 768px) {
   .dashboard-title {
     font-size: 2rem;
@@ -1117,6 +1143,7 @@ onMounted(() => {
     width: 35px;
     height: 35px;
     font-size: 1rem;
+    aspect-ratio: 1;
   }
   
   .stat-number {
@@ -1154,16 +1181,9 @@ onMounted(() => {
     font-size: 1.6rem;
   }
   
-  .stat-icon {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
-  }
-  
-  .stat-trend {
-    width: 20px;
-    height: 20px;
-    font-size: 0.7rem;
+  .stat-line {
+    width: 50px;
+    height: 3px;
   }
   
   .quick-actions-card .row {
